@@ -40,7 +40,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaseStationNumberOverMax() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         radio.setCurrentStation(33);
         int expected = 0;
 

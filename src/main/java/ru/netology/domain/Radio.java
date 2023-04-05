@@ -3,106 +3,82 @@ package ru.netology.domain;
 public class Radio {
 
     private int currentStation;
-    private int maxStation = 9;
+    private int numberStation = 10;
+    private int maxStation = numberStation - 1;
     private int minStation = 0;
     private int currentVolume;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
     private int minVolume = 0;
+
+    public Radio(int numberStation) { //конструктор для задания числа радиостанций
+        this.maxStation = numberStation - 1;
+    }
+
+    public Radio() { // конструктор для задания числа радиостанций по умолчанию
+
+
+    }
 
 
     public int getCurrentStation() {
+
         return currentStation;
     }
 
-    public void setCurrentStation(int currentStation) {
-        if (currentStation > maxStation) {
-            this.currentStation = maxStation;
+    public void setCurrentStation(int newCurrentStation) { // указываем границы диапазона
+        if (newCurrentStation < minStation) {
             return;
         }
-        if (currentStation < minStation) {
-            this.currentStation = minStation;
+        if (newCurrentStation > maxStation) {
             return;
         }
-        this.currentStation = currentStation;
+        currentStation = newCurrentStation;
     }
 
-    public void increaseStation() {
-        if (currentStation == maxStation) {
-            currentStation = minStation;
-            return;
+    public void nextStation() {
+        if (currentStation < maxStation) {
+            currentStation = currentStation + 1;
+        } else {
+            currentStation = minStation; // переход счетчика после 9 на 0
         }
-        currentStation++;
     }
 
-    public void decreaseStation() {
-        if (currentStation == minStation) {
-            currentStation = maxStation;
-            return;
+    public void prevStation() {
+        if (currentStation > minStation) {
+            currentStation = currentStation - 1;
+        } else {
+            currentStation = maxStation; // переход счетчика после 0 на 9
         }
-        currentStation--;
     }
-
-    //volume
 
 
     public int getCurrentVolume() {
         return currentVolume;
     }
 
-    public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > maxVolume) {
-            this.currentVolume = maxVolume;
+    public void setCurrentVolume(int newCurrentVolume) { // указываем границы диапазона
+        if (newCurrentVolume < minVolume) {
             return;
         }
-        if (currentVolume < minVolume) {
-            this.currentVolume = minVolume;
+        if (newCurrentVolume > maxVolume) {
             return;
         }
-        this.currentVolume = currentVolume;
+        currentVolume = newCurrentVolume;
     }
 
     public void increaseVolume() {
         if (currentVolume < maxVolume) {
-            currentVolume++;
+            currentVolume = currentVolume + 1;
+        } else {
+            currentVolume = maxVolume;
         }
     }
 
     public void decreaseVolume() {
         if (currentVolume > minVolume) {
-            currentVolume--;
+            currentVolume = currentVolume - 1;
+        } else {
+            currentVolume = minVolume;
         }
     }
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public void setMaxStation(int maxStation) {
-        this.maxStation = maxStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-    public void setMinStation(int minStation) {
-        this.minStation = minStation;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public void setMaxVolume(int maxVolume) {
-        this.maxVolume = maxVolume;
-    }
-
-    public int getMinVolume() {
-        return minVolume;
-    }
-
-    public void setMinVolume(int minVolume) {
-        this.minVolume = minVolume;
-    }
-
 }
